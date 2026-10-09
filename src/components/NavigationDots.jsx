@@ -1,16 +1,18 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable jsx-a11y/anchor-has-content */
-
 import React from "react";
+
+import { navItems } from "../constants";
 
 const NavigationDots = ({ active }) => (
   <div className="app__navigation">
-    {["home", "about", "work", "skills", "contact"].map((item, index) => (
+    {navItems.map((item) => (
       <a
-        href={`#${item}`}
-        key={item + index}
+        href={`#${item.id}`}
+        key={item.id}
+        aria-label={item.label}
         className="app__navigation-dot"
-        style={active === item ? { backgroundColor: "#313BAC" } : {}}
+        style={
+          active === item.id ? { backgroundColor: "var(--secondary-color)" } : {}
+        }
       />
     ))}
   </div>

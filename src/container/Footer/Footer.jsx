@@ -1,43 +1,44 @@
 import React, { useState } from "react";
+import { HiCheck, HiOutlineClipboardCopy, HiOutlineMail } from "react-icons/hi";
 
-import { images } from "../../constants";
+import { images, profile } from "../../constants";
 import { AppWrap, MotionWrap } from "../../wrapper";
-import { client } from "../../client";
 import "./Footer.scss";
 
+const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
+  "Hello Deepak"
+)}`;
+
+const contactCards = [
+  { label: "Email", value: profile.email, href: mailto, icon: images.email },
+  {
+    label: "Phone",
+    value: profile.phone,
+    href: `tel:${profile.phone.replace(/\s/g, "")}`,
+    icon: images.mobile,
+  },
+  {
+    label: "LinkedIn",
+    value: profile.name,
+    href: profile.linkedin,
+    icon: images.linkedin,
+    mono: true,
+    external: true,
+  },
+];
+
 const Footer = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const { username, email, message } = formData;
-
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = () => {
-    setLoading(true);
-
-    const contact = {
-      _type: "contact",
-      name: formData.username,
-      email: formData.email,
-      message: formData.message,
-    };
-
-    client
-      .create(contact)
-      .then(() => {
-        setLoading(false);
-        setIsFormSubmitted(true);
-      })
-      .catch((err) => console.log(err));
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard access can be blocked; let the visitor copy it by hand.
+      window.prompt("Copy my email address:", profile.email);
+    }
   };
 
   return (
@@ -46,60 +47,58 @@ const Footer = () => {
         Contact <span>Me</span>
       </h2>
 
-      <div className="app__footer-cards">
-        <div className="app__footer-card ">
-          <img src={images.email} alt="email" />
-          <a href="mailto:dsrdeepak8@gmail.com" className="p-text">
-            dsrdeepak8@gmail.com
-          </a>
-        </div>
-        <div className="app__footer-card">
-          <img src={images.mobile} alt="phone" />
-          <a href="tel:+91 7742798638" className="p-text">
-            +91 7742798638
-          </a>
-        </div>
+      <p className="p-text app__footer-intro">
+        Have a role or project in mind? The quickest way to reach me is email,
+        or connect with me on LinkedIn.
+      </p>
+
+      <div className="app__footer-actions">
+        <a className="app__footer-btn" href={mailto}>
+          <HiOutlineMail aria-hidden="true" /> Email Me
+        </a>
+        <button
+          type="button"
+          className="app__footer-btn app__footer-btn--ghost"
+          onClick={copyEmail}
+        >
+          {copied ? (
+            <>
+              <HiCheck aria-hidden="true" /> Copied!
+            </>
+          ) : (
+            <>
+              <HiOutlineClipboardCopy aria-hidden="true" /> Copy Email
+            </>
+          )}
+        </button>
       </div>
-      {!isFormSubmitted ? (
-        <div className="app__footer-form app__flex">
-          <div className="app__flex">
-            <input
-              className="p-text"
-              type="text"
-              placeholder="Your Name"
-              name="username"
-              value={username}
-              onChange={handleChangeInput}
+
+      <div className="app__footer-cards">
+        {contactCards.map((card) => (
+          <a
+            className="app__footer-card"
+            href={card.href}
+            key={card.label}
+            {...(card.external ? { target: "_blank", rel: "noreferrer" } : {})}
+          >
+            <img
+              src={card.icon}
+              alt=""
+              className={card.mono ? "app__icon-mono" : undefined}
             />
-          </div>
-          <div className="app__flex">
-            <input
-              className="p-text"
-              type="email"
-              placeholder="Your Email"
-              name="email"
-              value={email}
-              onChange={handleChangeInput}
-            />
-          </div>
-          <div>
-            <textarea
-              className="p-text"
-              placeholder="Your Message"
-              value={message}
-              name="message"
-              onChange={handleChangeInput}
-            />
-          </div>
-          <button type="button" className="p-text" onClick={handleSubmit}>
-            {!loading ? "Send Message" : "Sending..."}
-          </button>
-        </div>
-      ) : (
-        <div>
-          <h3 className="head-text">Thank you for getting in touch!</h3>
-        </div>
-      )}
+            <div>
+              <p className="p-text app__footer-card-label">{card.label}</p>
+              <p className="p-text app__footer-card-value">{card.value}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div className="copyright">
+        <p className="p-text">
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+      </div>
     </>
   );
 };

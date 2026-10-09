@@ -15,6 +15,23 @@
   }
 }
 
+// Keep the bubble texture but darken it for the dark theme.
+[data-theme="dark"] #home {
+  background-image: linear-gradient(rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.94)),
+    url("../../assets/bgIMG.png");
+}
+
+[data-theme="dark"] .app__header-img .overlay_circle {
+  opacity: 0.35;
+}
+
+// A soft rim light so dark clothing doesn't merge into the dark background.
+[data-theme="dark"] .app__header-img img:not(.overlay_circle) {
+  filter: drop-shadow(0 0 28px rgba(148, 163, 184, 0.3));
+}
+
+// Above 900px the hero is one row sized to the screen height, so it fits in a
+// single screen; at 900px and below it stacks and scrolls.
 .app__header {
   flex: 1;
   width: 100%;
@@ -27,7 +44,7 @@
     padding-top: 8rem;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
   }
 
@@ -37,66 +54,113 @@
 }
 
 .app__header-info {
-  flex: 0.65;
+  flex: 1.1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   height: 100%;
 
   margin: 0 2rem;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 900px) {
     width: 100%;
-    margin-right: 0rem;
+    margin: 0;
+    align-items: center;
   }
 }
 
-.app__header-badge {
+// Typed intro card. The untyped remainder is rendered invisibly so the card
+// keeps its final size while the text types in. Sizes shrink on short screens
+// so the card fits beside the photo.
+.app__header-intro {
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-direction: column;
+  max-width: 560px;
+  padding: clamp(1.25rem, 3.5vh, 2rem) clamp(1.25rem, 3.5vh, 2.25rem);
+  border-radius: 15px;
+  background: var(--surface-color);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 
-  .badge-cmp,
-  .tag-cmp {
-    padding: 1rem 2rem;
-    background: var(--white-color);
-    border-radius: 15px;
-    flex-direction: row;
-    width: auto;
-
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  .app__intro-title {
+    margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+    font-size: clamp(1.6rem, 0.9rem + 2.4vh, 2.25rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--black-color);
   }
 
-  .tag-cmp {
-    flex-direction: column;
-    margin-top: 3rem;
+  .app__intro-body {
+    margin-bottom: clamp(0.5rem, 1.4vh, 0.9rem);
+    font-size: clamp(0.85rem, 0.5rem + 1vh, 1.05rem);
+    line-height: 1.65;
+  }
 
-    p {
-      width: 100%;
-      text-transform: uppercase;
-      text-align: right;
+  .app__intro-cta {
+    display: inline-block;
+    margin-top: 0.25rem;
+    font-size: clamp(0.95rem, 0.6rem + 1.1vh, 1.15rem);
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 
-  span {
-    font-size: 2.5rem;
+  .app__typed-rest {
+    visibility: hidden;
+  }
 
-    @media screen and (min-width: 2000px) {
-      font-size: 5rem;
+  // Zero net width (width + negative margin) so the caret never re-wraps text.
+  .app__typed-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-right: -2px;
+    vertical-align: text-bottom;
+    background-color: var(--secondary-color);
+    animation: app__caret-blink 1s step-end infinite;
+  }
+
+  @media screen and (min-width: 2000px) {
+    max-width: 1000px;
+    padding: 3rem;
+
+    .app__intro-title {
+      font-size: 4rem;
+    }
+
+    .app__intro-body {
+      font-size: 1.75rem;
+    }
+
+    .app__intro-cta {
+      font-size: 2rem;
     }
   }
 
-  @media screen and (max-width: 1200px) {
-    justify-content: flex-start;
-    align-items: flex-start;
+  @media screen and (max-width: 450px) {
+    padding: 1.5rem 1.25rem;
+
+    .app__intro-title {
+      font-size: 1.75rem;
+    }
+
+    .app__intro-body {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+@keyframes app__caret-blink {
+  50% {
+    opacity: 0;
   }
 }
 
 .app__header-circles {
-  flex: 0.75;
+  flex: 0.5;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -109,8 +173,14 @@
     height: 100px;
     border-radius: 50%;
 
-    background: var(--white-color);
+    background: var(--surface-color);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+    a {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
 
     img {
       width: 60%;
@@ -118,22 +188,22 @@
     }
   }
 
-  // circles with different height & width
+  // circles with different sizes, scaled down on short screens
 
   div:nth-child(1) {
-    width: 100px;
-    height: 100px;
+    width: clamp(64px, 11vh, 100px);
+    height: clamp(64px, 11vh, 100px);
   }
 
   div:nth-child(2) {
-    margin: 1.75rem;
-    width: 150px;
-    height: 150px;
+    margin: clamp(0.75rem, 2.5vh, 1.75rem);
+    width: clamp(96px, 16vh, 150px);
+    height: clamp(96px, 16vh, 150px);
   }
 
   div:nth-child(3) {
-    width: 70px;
-    height: 70px;
+    width: clamp(48px, 7.5vh, 70px);
+    height: clamp(48px, 7.5vh, 70px);
   }
 
   @media screen and (min-width: 2000px) {
@@ -153,7 +223,7 @@
     }
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 900px) {
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
@@ -170,7 +240,7 @@
   height: 100%;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-end;
   position: relative;
 
@@ -178,6 +248,27 @@
     width: 100%;
     object-fit: contain;
     z-index: 1;
+  }
+
+  // Row layout: as tall as the screen allows below the navbar (the 7rem covers
+  // the top padding plus a little air). Stacked layout: as wide as the screen.
+  .app__header-photo {
+    width: auto;
+    height: calc(100vh - 7rem);
+    height: calc(100dvh - 7rem);
+    max-width: 100%;
+    object-position: bottom;
+
+    @media screen and (min-width: 2000px) {
+      height: calc(100vh - 9rem);
+      height: calc(100dvh - 9rem);
+    }
+
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      height: auto;
+      max-width: 566px;
+    }
   }
 
   .overlay_circle {
@@ -190,7 +281,52 @@
     height: 90%;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 900px) {
     margin: 2rem 0;
+  }
+}
+
+// Tablets (501–900px, where the side icons still show): intro card on top,
+// photo and circles side by side below it, sized so the hero fits one screen.
+// Phones (500px and below) keep the plain stacked layout and scroll.
+@media screen and (min-width: 501px) and (max-width: 900px) {
+  .app__header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    // Card at the top, photo row at the bottom of the hero.
+    align-content: space-between;
+  }
+
+  .app__header-info {
+    flex: 0 0 100%;
+    height: auto;
+  }
+
+  .app__header-img {
+    // Start from the photo's natural width (not 0) so it wraps below the card.
+    flex: 1 1 auto;
+    height: auto;
+    margin: 2rem 0 0;
+
+    .app__header-photo {
+      width: auto;
+      height: 45vh;
+      height: 45dvh;
+      max-width: 100%;
+    }
+  }
+
+  .app__header-circles {
+    flex: 0 0 auto;
+    width: auto;
+    height: 45vh;
+    height: 45dvh;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin: 2rem 0 0 1rem;
+
+    div {
+      margin: 0;
+    }
   }
 }

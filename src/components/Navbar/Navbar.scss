@@ -6,13 +6,13 @@
   align-items: center;
 
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.25);
-  // box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  background: var(--navbar-bg);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--navbar-border);
   position: fixed;
   z-index: 2;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .app__navbar-logo {
@@ -23,6 +23,7 @@
   img {
     width: 60px;
     height: 30px;
+    filter: var(--logo-filter);
 
     @media screen and (min-width: 2000px) {
       width: 180px;
@@ -97,7 +98,7 @@
   svg {
     width: 70%;
     height: 70%;
-    color: var(--white-color);
+    color: var(--on-accent-color);
   }
 
   div {
@@ -118,7 +119,7 @@
     flex-direction: column;
     
     background: url('../../assets/bgWhite.png');
-    background-color: var(--white-color);
+    background-color: var(--surface-color);
     background-size: cover;
     background-repeat: repeat;
 
@@ -172,5 +173,82 @@
 
   @media screen and (min-width: 900px) {
     display: none;
+  }
+}
+
+// The light background texture doesn't suit the dark theme.
+[data-theme="dark"] .app__navbar-menu div {
+  background-image: none;
+}
+
+.app__navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+// Light/dark switch: the knob slides from the sun (left) to the moon (right).
+.app__theme-toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 60px;
+  height: 30px;
+  padding: 0 7px;
+  border-radius: 999px;
+  border: 1px solid var(--lightGray-color);
+  background-color: var(--surface-color);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+  svg {
+    position: relative;
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+    color: var(--gray-color);
+    transition: color 0.3s ease-in-out;
+  }
+
+  .app__theme-toggle-sun {
+    color: var(--on-accent-color);
+  }
+
+  .app__theme-toggle-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &.is-dark {
+    .app__theme-toggle-knob {
+      transform: translateX(30px);
+    }
+
+    .app__theme-toggle-sun {
+      color: var(--gray-color);
+    }
+
+    .app__theme-toggle-moon {
+      color: var(--on-accent-color);
+    }
+  }
+
+  &:hover {
+    border-color: var(--secondary-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
   }
 }

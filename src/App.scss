@@ -4,11 +4,36 @@
 }
 
 .app__whitebg {
-  background-color: var(--white-color);
+  background-color: var(--surface-color);
 }
 
 .app__primarybg {
   background-color: var(--primary-color);
+}
+
+.app__whitebg,
+.app__primarybg {
+  transition: background-color 0.3s ease-in-out;
+}
+
+// Visually hidden but still read by screen readers and search engines.
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Black PNG icons (LinkedIn, resume, GitHub) turn white in dark mode. The blend
+// mode hides linkedin.png's solid white background (black once inverted).
+.app__icon-mono {
+  filter: var(--icon-filter);
+  mix-blend-mode: var(--icon-blend);
 }
 
 .app__container {
@@ -28,6 +53,9 @@
 .app__wrapper {
   flex: 1;
   width: 100%;
+  // Let the column shrink to the screen; without this, grid content can make
+  // it wider than the viewport and cause sideways scrolling.
+  min-width: 0;
   flex-direction: column;
   padding: 4rem 2rem;
 
@@ -109,7 +137,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: var(--white-color);
+    background-color: var(--surface-color);
     margin: 0.25rem 0;
     border: 1px solid var(--lightGray-color);
 
@@ -118,6 +146,14 @@
     align-items: center;
 
     transition: all 0.3s ease-in-out;
+
+    a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     svg {
       width: 15px;
@@ -130,7 +166,7 @@
       border-color: var(--secondary-color);
 
       svg {
-        color: var(--white-color);
+        color: var(--on-accent-color);
       }
     }
 
@@ -160,7 +196,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #cbcbcb;
+    background-color: var(--dot-color);
     margin: 0.5rem;
 
     transition: background-color 0.2s ease-in-out;

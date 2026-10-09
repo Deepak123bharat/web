@@ -4,6 +4,19 @@
   flex-direction: column;
 }
 
+// Scoped under .app__about so it wins over the global .p-text rules in App.scss.
+.app__about .app__about-summary {
+  max-width: 760px;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  text-align: center;
+
+  @media screen and (min-width: 2000px) {
+    max-width: 1400px;
+    font-size: 1.75rem;
+  }
+}
+
 .app__profiles {
   display: flex;
   justify-content: center;

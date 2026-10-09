@@ -2,29 +2,23 @@ import React from "react";
 import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { GrResume } from "react-icons/gr";
 
+import { profile } from "../constants";
+
+const links = [
+  { href: profile.linkedin, label: "LinkedIn", Icon: BsLinkedin },
+  { href: profile.github, label: "GitHub", Icon: BsGithub },
+  { href: profile.resume, label: "Resume", Icon: GrResume },
+];
+
 const SocialMedia = () => (
   <div className="app__social">
-    <div>
-      <a
-        href="https://www.linkedin.com/in/deepak-singh-rathore-a100aa181/"
-        target="_blank"
-      >
-        <BsLinkedin />
-      </a>
-    </div>
-    <div>
-      <a href="https://github.com/Deepak123bharat" target="_blank">
-        <BsGithub />
-      </a>
-    </div>
-    <div>
-      <a
-        href="https://drive.google.com/file/d/12ZIFGAFEGWiLSavXGhr3vL5ACfeP35Pj/view?usp=sharing"
-        target="_blank"
-      >
-        <GrResume />
-      </a>
-    </div>
+    {links.map(({ href, label, Icon }) => (
+      <div key={label}>
+        <a href={href} target="_blank" rel="noreferrer" aria-label={label}>
+          <Icon />
+        </a>
+      </div>
+    ))}
   </div>
 );
 

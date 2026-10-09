@@ -1,38 +1,30 @@
 {
   "files": {
-    "main.css": "/web/static/css/main.5c9edcbe.css",
-    "main.js": "/web/static/js/main.a434a685.js",
+    "main.css": "/web/static/css/main.3e782b93.css",
+    "main.js": "/web/static/js/main.84955b11.js",
     "static/media/about04.png": "/web/static/media/about04.fa7b3a72ed32b0e25bfb.png",
+    "static/media/smvdu-club.png": "/web/static/media/smvdu-club.7e0d6fde83087ab89076.png",
     "static/media/about02.png": "/web/static/media/about02.7a3df03410ee756268ec.png",
     "static/media/about01.png": "/web/static/media/about01.080509de05322b7aafda.png",
     "static/media/bgIMG.png": "/web/static/media/bgIMG.c39101e520e2997fc6d4.png",
     "static/media/bgWhite.png": "/web/static/media/bgWhite.79658cadae50b3b16ee5.png",
-    "static/media/about03.png": "/web/static/media/about03.c26c2547bb1a423cf283.png",
-    "static/media/spotify.png": "/web/static/media/spotify.2b5e9be1eb1ab501e7cd.png",
-    "static/media/nb.png": "/web/static/media/nb.98f3253e32cc67a4cb5e.png",
-    "static/media/asus.png": "/web/static/media/asus.514bc34955008a92e09f.png",
-    "static/media/profile.png": "/web/static/media/profile.d6cad24313165086eafb.png",
-    "static/media/adidas.png": "/web/static/media/adidas.83df8153294f9137d308.png",
+    "static/media/profile.png": "/web/static/media/profile.6bf7f6cb97c7784579e5.png",
+    "static/media/lua-gl-web.png": "/web/static/media/lua-gl-web.3589a27e97de5effa677.png",
+    "static/media/lua-gl.png": "/web/static/media/lua-gl.a67c3f9aa8a38bee95d1.png",
+    "static/media/open-source.jpg": "/web/static/media/open-source.de9ff3ad16eb6849f54c.jpg",
     "static/media/logo.png": "/web/static/media/logo.e99031332328f3d0a5c6.png",
-    "static/media/bolt.png": "/web/static/media/bolt.64e7d9d30ece478ef3a0.png",
-    "static/media/node.png": "/web/static/media/node.8683d89cf78ffae3d1f7.png",
-    "static/media/cpp.png": "/web/static/media/cpp.9002a804bbfa0354d0b8.png",
-    "static/media/graphql.png": "/web/static/media/graphql.0372057049181c5de51a.png",
-    "static/media/redux.png": "/web/static/media/redux.e4b7a7c9033856f76038.png",
-    "static/media/amazon.png": "/web/static/media/amazon.0a8be1f53138b5c52456.png",
+    "static/media/luarocks.png": "/web/static/media/luarocks.4e9bae4a7ea6d64d0d5b.png",
+    "static/media/resume.png": "/web/static/media/resume.e4b7a7c9033856f76038.png",
     "static/media/mobile.png": "/web/static/media/mobile.145d9ce0157a56f8fcd8.png",
     "static/media/email.png": "/web/static/media/email.37b9e890eea501421fbf.png",
-    "static/media/figma.png": "/web/static/media/figma.152e55329b6f1915967e.png",
-    "static/media/css.png": "/web/static/media/css.5721a3928fe43de6baf8.png",
-    "static/media/git.png": "/web/static/media/git.a54d3fa44e02f2f61e69.png",
-    "static/media/skype.png": "/web/static/media/skype.c8d7ee175da5b4c8a8ab.png",
+    "static/media/image-compression.webp": "/web/static/media/image-compression.05052e77e5db5e3c3e75.webp",
     "index.html": "/web/index.html",
     "static/media/circle.svg": "/web/static/media/circle.ae5f84b3853b9e34aa83cf8dada715c5.svg",
-    "main.5c9edcbe.css.map": "/web/static/css/main.5c9edcbe.css.map",
-    "main.a434a685.js.map": "/web/static/js/main.a434a685.js.map"
+    "main.3e782b93.css.map": "/web/static/css/main.3e782b93.css.map",
+    "main.84955b11.js.map": "/web/static/js/main.84955b11.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c9edcbe.css",
-    "static/js/main.a434a685.js"
+    "static/css/main.3e782b93.css",
+    "static/js/main.84955b11.js"
   ]
 }

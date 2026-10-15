@@ -1,6 +1,6 @@
 import React from "react";
 
-import { About, Experience, Footer, Header, Skills, Work } from "./container";
+import { About, Experience, Featured, Footer, Header, Skills, Work } from "./container";
 import { Navbar } from "./components";
 import "./App.scss";
 
@@ -9,6 +9,7 @@ const App = () => (
     <Navbar />
     <Header />
     <About />
+    <Featured />
     <Experience />
     <Skills />
     <Work />

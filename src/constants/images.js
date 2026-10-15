@@ -13,12 +13,9 @@ import profile from "../assets/profile.png";
 import circle from "../assets/circle.svg";
 import logo from "../assets/logo.png";
 
-import imageCompression from "../assets/projects/image-compression.webp";
-import luaGlWeb from "../assets/projects/lua-gl-web.png";
 import luaGl from "../assets/projects/lua-gl.png";
 import luarocks from "../assets/projects/luarocks.png";
-import myNetDiary from "../assets/projects/mynetdiary.png";
-import smvduClub from "../assets/projects/smvdu-club.png";
+import manualReturnsSample from "../assets/manual-returns-sample.svg";
 
 const images = {
   email,
@@ -33,12 +30,9 @@ const images = {
   profile,
   circle,
   logo,
-  imageCompression,
-  luaGlWeb,
   luaGl,
   luarocks,
-  myNetDiary,
-  smvduClub,
+  manualReturnsSample,
 };
 
 export default images;

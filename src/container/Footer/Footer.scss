@@ -4,6 +4,11 @@
   flex-direction: column;
 }
 
+// Hidden, not removed, so the column keeps its width and the content stays centered.
+#contact .app__social {
+  visibility: hidden;
+}
+
 .app__footer-actions {
   display: flex;
   flex-wrap: wrap;
@@ -113,6 +118,13 @@
 
 // Scoped so these win over the global .p-text rule in App.scss.
 .app__footer {
+  // Auto margins split the free space: the contact content stays centered and
+  // the copyright sits at the bottom of the section.
+  > .head-text,
+  > .copyright {
+    margin-top: auto;
+  }
+
   .app__footer-intro {
     max-width: 600px;
     margin-top: 1rem;

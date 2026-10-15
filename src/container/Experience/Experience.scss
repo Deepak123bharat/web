@@ -137,8 +137,37 @@
     }
   }
 
+  .app__exp-company a,
+  .app__exp-product a {
+    color: inherit;
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+
+    &:hover {
+      text-decoration-style: solid;
+    }
+  }
+
+  .app__exp-letter {
+    grid-column: 1 / -1;
+  }
+
+  .app__exp-quote {
+    margin: 0.25rem 0 0.75rem;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--black-color);
+
+    @media screen and (min-width: 2000px) {
+      font-size: 1.9rem;
+    }
+  }
+
   .app__exp-subhead {
     margin-top: 4rem;
+    // Keeps #credentials from landing under the fixed navbar.
+    scroll-margin-top: 5rem;
     font-size: 2rem;
 
     @media screen and (min-width: 2000px) {
